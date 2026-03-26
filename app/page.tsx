@@ -249,7 +249,13 @@ export default function Home() {
         <div className="container mx-auto px-6 py-12">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <a href="#" className="text-2xl font-bold text-white">Tai<span className="text-blue-400">Chile</span></a>
+              <a href="#" className="flex items-center">
+                <img 
+                  src="/tai.png" 
+                  alt="Taichile" 
+                  className="h-12 w-auto"
+                />
+              </a>
               <p className="mt-4 text-gray-300 text-sm">Villa Don Rodolfo, Talca</p>
               <p className="mt-2 text-gray-300 text-sm">📞 +56 071 2243050</p>
               <p className="text-gray-300 text-sm">✉️ contacto@taichile.com</p>
