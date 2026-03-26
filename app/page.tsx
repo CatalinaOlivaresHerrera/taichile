@@ -1,16 +1,21 @@
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Header - Estilo ESOM con colores Taichile */}
+      {/* Header -  */}
       <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="text-2xl font-bold text-green-700">
-            Tai<span className="text-blue-600">Chile</span>
+          {/* Logo como imagen */}
+          <a href="#" className="flex items-center">
+            <img 
+              src="/tai.png" 
+              alt="Taichile" 
+              className="h-12 w-auto"
+            />
           </a>
 
           {/* Menú desktop */}
           <div className="hidden lg:flex items-center space-x-6">
-            <a href="#inicio" className="text-gray-600 hover:text-green-700 font-medium">Inicio</a>
+            <a href="#inicio" className="font-medium" style={{ color: 'rgb(255, 60, 65)' }}>Inicio</a>
             <a href="#servicios" className="text-gray-600 hover:text-green-700 font-medium">Servicios</a>
             <a href="#instalaciones" className="text-gray-600 hover:text-green-700 font-medium">Instalaciones</a>
             <a href="#equipo" className="text-gray-600 hover:text-green-700 font-medium">Equipo</a>
