@@ -1,3 +1,4 @@
+import Image from "next/image";
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
@@ -14,20 +15,15 @@ export default function Home() {
           </a>
 
           {/* Menú desktop */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <a href="#inicio" className="font-medium" style={{ color: 'rgb(255, 60, 65)' }}>Inicio</a>
-            <a href="#servicios" className="text-gray-600 hover:text-green-700 font-medium">Servicios</a>
-            <a href="#instalaciones" className="text-gray-600 hover:text-green-700 font-medium">Instalaciones</a>
-            <a href="#equipo" className="text-gray-600 hover:text-green-700 font-medium">Equipo</a>
-            <a href="#beneficios" className="text-gray-600 hover:text-green-700 font-medium">Beneficios</a>
-            <a href="#contacto" className="text-white px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-all" style={{ backgroundColor: 'rgb(255, 60, 65)' }}>Cotizar</a>
-          </div>
-
-          {/* Botón Acceso Clientes */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <a href="#" className="px-4 py-2 text-sm font-semibold text-white rounded-lg hover:opacity-90 transition-all" style={{ backgroundColor: 'rgb(255, 60, 65)' }}>
-              Acceso Clientes
-            </a>
+          <div className="hidden lg:flex items-center space-x-2">
+            <a href="#inicio" className="text-white px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-all" style={{ backgroundColor: 'rgb(255, 60, 65)' }}>INICIO</a>
+            <a href="#clientes" className="text-gray-600 hover:text-green-700 font-medium">CLIENTES</a>
+            <a href="#productos" className="text-gray-600 hover:text-green-700 font-medium">PRODCUCTOS</a>
+            <a href="#proyectos" className="text-gray-600 hover:text-green-700 font-medium">PROYECTOS</a>
+            <a href="#servicios" className="text-gray-600 hover:text-green-700 font-medium">SERVICIOS</a>
+            <a href="#partners" className="text-gray-600 hover:text-green-700 font-medium">PARTNERS</a>
+            <a href="#empresa" className="text-gray-600 hover:text-green-700 font-medium">EMPRESA</a>
+            <a href="#inicio" className="text-white px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-all" style={{ backgroundColor: 'rgb(249, 249, 249)' }}>CONTACTO</a>
           </div>
 
           {/* Botón móvil */}
@@ -117,7 +113,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quiénes Somos - Texto original de taichile.com */}
+      {/* Quiénes Somos -*/}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -140,7 +136,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Servicios Industriales - Texto original */}
+      {/* Servicios Industriales -*/}
       <section id="servicios" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center text-green-800 mb-12">Servicios Especializados</h2>
