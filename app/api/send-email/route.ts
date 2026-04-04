@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     // 4. Enviar el correo electrónico
     const { data, error } = await resend.emails.send({
       from: 'Formulario Web <onboarding@resend.dev>', // Este es el remitente de prueba
-      to: ['catalinaolivaresh@gmail.com'], // <<< --- ¡CAMBIA ESTE EMAIL POR EL TUYO! ---
+      to: ['catita9olivares@gmail.com'], // <<< --- ¡CAMBIA ESTE EMAIL POR EL TUYO! ---
       subject: `Nuevo contacto desde la web: ${nombre}`,
       text: `
         Se ha recibido un nuevo mensaje de contacto:
