@@ -31,7 +31,7 @@ export default function Home() {
     setEnviando(true);
     setError(false);
     try {
-      const res = await fetch('/api/contacto', {
+      const res = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

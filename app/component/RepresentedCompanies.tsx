@@ -6,7 +6,7 @@ import { useState } from 'react';
 const companies = [
   {
     name: 'BTG',
-    logo: '/logos/btg-logo.png',
+    logo: '/btg.png',
     color: '#003366',
     menuItems: [
       { name: 'PULPA', href: '/productos/btg/pulpa' },
@@ -18,7 +18,7 @@ const companies = [
   },
   {
     name: 'MAXCESS',
-    logo: '/logos/maxcess-logo.png',
+    logo: '/maxcess.png',
     color: '#0099CC',
     menuItems: [
       { name: 'RotoMetrics', href: '/productos/maxcess/rotometrics' },
@@ -29,7 +29,7 @@ const companies = [
   },
   {
     name: 'TECHPAP',
-    logo: '/logos/techpap-logo.png',
+    logo: '/techpap.png',
     color: '#006633',
     menuItems: [
       { name: 'EQUIPOS DE LABORATORIO', href: '/productos/techpap/laboratorio' },

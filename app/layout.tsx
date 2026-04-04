@@ -15,7 +15,7 @@ const sourceCodePro = Source_Code_Pro({
 })
 
 export const metadata: Metadata = {
-  title: "TAI Chile",
+  title: "TaiChile",
   description: "Tecnologías de Aplicación Industrial",
 };
 

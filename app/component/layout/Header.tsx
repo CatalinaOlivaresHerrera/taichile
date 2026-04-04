@@ -8,11 +8,14 @@ export default function Header({ onMenuOpen }: HeaderProps) {
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
       <nav className="container mx-auto px-4 py-1 flex justify-between items-center">
-        <a href="#" className="flex items-center shrink-0 relative">
-          <img src="/taiLogo.png" alt="Taichile" className="h-32 w-auto relative z-10" style={{ height: "8rem" }} />
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-            <img src="/taiLogo.png" alt="" className="h-40 w-auto" />
-          </div>
+        {/* Logo sin el efecto de marca de agua de fondo */}
+        <a href="#" className="flex items-center shrink-0">
+          <img 
+            src="/taiLogo.png" 
+            alt="Taichile" 
+            className="h-32 w-auto" 
+            style={{ height: "8rem" }} 
+          />
         </a>
         
         <div className="hidden lg:flex items-center space-x-4">
