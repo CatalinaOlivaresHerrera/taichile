@@ -27,7 +27,7 @@ export default function RotatingEquipmentPopup() {
         
         <div className="relative">
           <img 
-            src="/equipo-rotatorio.gif" 
+            src="/MEK-STRATUS-360.gif" 
             alt="Equipo Rotatorio - Nueva Tecnología" 
             className="w-full h-auto"
             onError={(e) => {
