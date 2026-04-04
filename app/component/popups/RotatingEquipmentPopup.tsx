@@ -31,7 +31,7 @@ export default function RotatingEquipmentPopup() {
             alt="Equipo Rotatorio - Nueva Tecnología" 
             className="w-full h-auto"
             onError={(e) => {
-              e.currentTarget.src = '/placeholder.gif';
+              e.currentTarget.src = 'MEK-STRATUS-360/.gif';
               e.currentTarget.alt = 'Imagen no disponible';
             }}
           />
