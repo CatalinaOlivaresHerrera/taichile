@@ -1,4 +1,3 @@
-// C:\Users\cata\taichile\app\component\popups\RotatingEquipmentPopup.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
