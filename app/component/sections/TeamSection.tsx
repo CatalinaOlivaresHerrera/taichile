@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react';
 interface TeamMember { name: string; role: string; desc: string; avatarSrc?: string; }
 
 const TEAM_MEMBERS: TeamMember[] = [
-  { name: "Francisco Carmeño", role: "Ingeniero Informatico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/franciscoCar.jpeg" },
-  { name: "Jose Sepulveda", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/joseSe.jpeg" },
+  { name: "Jose Sepulveda", role: "Ingeniero Informatico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/franciscoCar.jpeg" },
+  { name: "Francisco Carmeño", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/joseSe.jpeg" },
   { name: "Ignacio Chacon", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/ignacio.jpg" }
 ];
 
