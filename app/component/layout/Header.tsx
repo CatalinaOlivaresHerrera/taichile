@@ -7,7 +7,6 @@ interface HeaderProps {
 }
 
 export default function Header({ onMenuOpen }: HeaderProps) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   // Función para scroll suave hasta el inicio de la sección
@@ -68,7 +67,7 @@ export default function Header({ onMenuOpen }: HeaderProps) {
       }
     );
 
-    // Observar cada sección directamente (no el h2)
+    // Observar cada sección directamente
     sections.forEach(sectionId => {
       const section = document.getElementById(sectionId);
       if (section) {
@@ -110,19 +109,6 @@ export default function Header({ onMenuOpen }: HeaderProps) {
         </a>
 
         <div className="hidden lg:flex items-center space-x-6">
-          {/* INICIO */}
-          <a
-            href="#hero"
-            onClick={(e) => handleSmoothScroll(e, 'hero')}
-            className={`font-medium py-2 transition-all ${
-              activeSection === 'hero'
-                ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
-                : 'text-gray-600 hover:text-cyan-600'
-            }`}
-          >
-            INICIO
-          </a>
-
           {/* QUIÉNES SOMOS */}
           <a
             href="#about"
@@ -136,70 +122,31 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             QUIÉNES SOMOS
           </a>
 
-          {/* PROYECTOS con dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
+          {/* PRODUCTOS */}
+          <a
+            href="#products"
+            onClick={(e) => handleSmoothScroll(e, 'products')}
+            className={`font-medium py-2 transition-all ${
+              activeSection === 'products'
+                ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
+                : 'text-gray-600 hover:text-cyan-600'
+            }`}
           >
-            <button
-              className={`font-medium py-2 flex items-center gap-1 transition-all ${
-                activeSection === 'services' || activeSection === 'products'
-                  ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
-                  : 'text-gray-600 hover:text-cyan-600'
-              }`}
-            >
-              PROYECTOS
-              <svg
-                className={`w-4 h-4 transition-transform ${
-                  isDropdownOpen ? 'rotate-180' : ''
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
+            PRODUCTOS
+          </a>
 
-            {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-lg py-2 z-50 border border-gray-100">
-                <a
-                  href="#services"
-                  onClick={(e) => {
-                    handleSmoothScroll(e, 'services');
-                    setIsDropdownOpen(false);
-                  }}
-                  className={`block px-4 py-2 transition-colors ${
-                    activeSection === 'services'
-                      ? 'bg-cyan-50 text-cyan-600 font-semibold'
-                      : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
-                  }`}
-                >
-                  Servicios
-                </a>
-                <a
-                  href="#products"
-                  onClick={(e) => {
-                    handleSmoothScroll(e, 'products');
-                    setIsDropdownOpen(false);
-                  }}
-                  className={`block px-4 py-2 transition-colors ${
-                    activeSection === 'products'
-                      ? 'bg-cyan-50 text-cyan-600 font-semibold'
-                      : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
-                  }`}
-                >
-                  Productos
-                </a>
-              </div>
-            )}
-          </div>
+          {/* SERVICIOS */}
+          <a
+            href="#services"
+            onClick={(e) => handleSmoothScroll(e, 'services')}
+            className={`font-medium py-2 transition-all ${
+              activeSection === 'services'
+                ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
+                : 'text-gray-600 hover:text-cyan-600'
+            }`}
+          >
+            SERVICIOS
+          </a>
 
           {/* NUESTRO EQUIPO */}
           <a
