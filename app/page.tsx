@@ -17,12 +17,24 @@ import ClientsCarousel from "./component/ClientsCarousel";
 import RotatingEquipmentPopup from "./component/popups/RotatingEquipmentPopup";
 import WhatsAppWidget from "./component/WhatsAppWidget";
 
-
-
+// Definir la interfaz FormData
+interface FormData {
+  nombre: string;
+  email: string;
+  telefono: string;
+  producto: string;
+  servicio: string;
+}
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ nombre: '', email: '', telefono: '' });
+  const [formData, setFormData] = useState<FormData>({ 
+    nombre: '', 
+    email: '', 
+    telefono: '',
+    producto: '',   // ← AGREGADO
+    servicio: ''    // ← AGREGADO
+  });
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
   const [error, setError] = useState(false);
@@ -34,11 +46,28 @@ export default function Home() {
       const res = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          producto: formData.producto,   // ← ENVIAR
+          servicio: formData.servicio    // ← ENVIAR
+        }),
       });
       const data = await res.json();
-      if (data.ok) setEnviado(true);
-      else setError(true);
+      if (data.ok) {
+        setEnviado(true);
+        // Resetear el formulario incluyendo producto y servicio
+        setFormData({ 
+          nombre: '', 
+          email: '', 
+          telefono: '',
+          producto: '',
+          servicio: ''
+        });
+      } else {
+        setError(true);
+      }
     } catch {
       setError(true);
     } finally {
