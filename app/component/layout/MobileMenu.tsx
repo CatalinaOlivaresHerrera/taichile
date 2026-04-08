@@ -7,21 +7,27 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const menuItems = [
-    { name: "INICIO", href: "#inicio", primary: true },
-    { name: "CLIENTES", href: "#clientes", primary: false },
-    { name: "PRODUCTOS", href: "#productos", primary: false },
-    { name: "PROYECTOS", href: "#proyectos", primary: false },
-    { name: "SERVICIOS", href: "#servicios", primary: false },
-    { name: "PARTNERS", href: "#partners", primary: false },
-    { name: "EMPRESA", href: "#empresa", primary: false },
-    { name: "CONTACTO", href: "#contacto", primary: true, isContact: true },
+    { name: "QUIÉNES SOMOS", href: "#about", primary: false },
+    { name: "PRODUCTOS", href: "#products", primary: false },
+    { name: "SERVICIOS", href: "#services", primary: false },
+    { name: "NUESTRO EQUIPO", href: "#team", primary: false },
+    { name: "CLIENTES", href: "#clients", primary: false },
+    { name: "REPRESENTACIONES", href: "#represented-companies", primary: false },
+    { name: "CONTACTO", href: "#hero", primary: true, isContact: true },
   ];
 
   const handleClick = (href: string) => {
     onClose();
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const headerHeight = document.querySelector('header')?.offsetHeight ?? 56;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
@@ -46,7 +52,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               onClick={() => handleClick(item.href)}
               className={`text-left px-4 py-2.5 rounded-md font-semibold transition-all ${
                 item.primary
-                  ? item.isContact ? "text-white bg-gray-400" : "text-white bg-red-500"
+                  ? item.isContact ? "text-white" : "text-white bg-red-500"
                   : "text-gray-600 hover:text-cyan-600 hover:bg-gray-50"
               }`}
               style={item.primary && item.isContact ? { backgroundColor: "rgb(157,158,160)" } : undefined}
