@@ -81,25 +81,67 @@ export default function Home() {
       <Header onMenuOpen={() => setIsMenuOpen(true)} />
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       
-      <HeroSection 
-        formData={formData}
-        setFormData={setFormData}
-        enviando={enviando}
-        enviado={enviado}
-        error={error}
-        onSubmit={handleSubmit}
-      />
+      {/* INICIO - HeroSection */}
+      <section id="hero">
+        <HeroSection 
+          formData={formData}
+          setFormData={setFormData}
+          enviando={enviando}
+          enviado={enviado}
+          error={error}
+          onSubmit={handleSubmit}
+        />
+      </section>
       
-      <AboutSection />
-      <TeamSection />
-      <ProcessSection />
-      <ServicesSection />
-      <ProductsSection />
-      <AboutTaichileSection />
-      <MissionSection />
-      <LocationSection />
-      <RepresentedCompanies />
-      <ClientsCarousel />
+      {/* QUIÉNES SOMOS - AboutSection */}
+      <section id="about">
+        <AboutSection />
+      </section>
+      
+      {/* NUESTRO EQUIPO - TeamSection */}
+      <section id="team">
+        <TeamSection />
+      </section>
+      
+      {/* ProcessSection (opcional, no está en el header pero se mantiene) */}
+      <section id="process">
+        <ProcessSection />
+      </section>
+      
+      {/* SERVICIOS - ServicesSection */}
+      <section id="services">
+        <ServicesSection />
+      </section>
+      
+      {/* PRODUCTOS - ProductsSection */}
+      <section id="products">
+        <ProductsSection />
+      </section>
+      
+      {/* AboutTaichileSection (opcional) */}
+      <section id="about-taichile">
+        <AboutTaichileSection />
+      </section>
+      
+      {/* MissionSection (opcional) */}
+      <section id="mission">
+        <MissionSection />
+      </section>
+      
+      {/* CONTACTO - LocationSection */}
+      <section id="location">
+        <LocationSection />
+      </section>
+      
+      {/* REPRESENTACIONES - RepresentedCompanies */}
+      <section id="represented-companies">
+        <RepresentedCompanies />
+      </section>
+      
+      {/* CLIENTES - ClientsCarousel */}
+      <section id="clients">
+        <ClientsCarousel />
+      </section>
       
       <Footer />
       <WhatsAppWidget 

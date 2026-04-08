@@ -8,161 +8,268 @@ interface HeaderProps {
 
 export default function Header({ onMenuOpen }: HeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('inicio');
+  const [activeSection, setActiveSection] = useState('hero');
 
-  // Detectar qué sección está visible en el viewport
+  // Función para scroll suave hasta el inicio de la sección
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    // Medir el header dinámicamente para compensar siempre la altura real
+    const headerHeight = document.querySelector('header')?.offsetHeight ?? 56;
+    const elementPosition = section.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+    
+    window.history.pushState({}, '', `#${sectionId}`);
+    setActiveSection(sectionId);
+  };
+
+  // Detectar sección visible
   useEffect(() => {
-    const sections = document.querySelectorAll('section[id], div[id]');
+    const sections = [
+      'hero',
+      'about', 
+      'team',
+      'process',
+      'services',
+      'products',
+      'about-taichile',
+      'mission',
+      'location',
+      'represented-companies',
+      'clients'
+    ];
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            let section: Element | null = entry.target;
+            while (section && !sections.includes(section.id)) {
+              section = section.parentElement;
+            }
+            if (section && section.id) {
+              setActiveSection(section.id);
+              window.history.replaceState({}, '', `#${section.id}`);
+            }
           }
         });
       },
-      { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' }
+      { 
+        threshold: 0.3,
+        rootMargin: '-56px 0px 0px 0px'
+      }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    // Observar cada sección directamente (no el h2)
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    // Verificar hash inicial
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      setTimeout(() => {
+        const section = document.getElementById(hash);
+        if (section) {
+          const headerHeight = document.querySelector('header')?.offsetHeight ?? 56;
+          const elementPosition = section.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+    }
 
     return () => observer.disconnect();
   }, []);
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
-      <nav className="container mx-auto px-4 py-1 flex justify-between items-center">
+      <nav className="container mx-auto px-4 py-2 flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="flex items-center shrink-0">
-          <img 
-            src="/taiLogo.png" 
-            alt="Taichile" 
-            className="h-32 w-auto" 
-            style={{ height: "8rem" }} 
+        <a
+          href="#hero"
+          onClick={(e) => handleSmoothScroll(e, 'hero')}
+          className="flex items-center shrink-0"
+        >
+          <img
+            src="/taiLogo.png"
+            alt="Taichile"
+            className="h-20 w-auto"
           />
         </a>
-        
+
         <div className="hidden lg:flex items-center space-x-6">
           {/* INICIO */}
-          <a 
-            href="#inicio" 
+          <a
+            href="#hero"
+            onClick={(e) => handleSmoothScroll(e, 'hero')}
             className={`font-medium py-2 transition-all ${
-              activeSection === 'inicio'
+              activeSection === 'hero'
                 ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
                 : 'text-gray-600 hover:text-cyan-600'
             }`}
           >
             INICIO
           </a>
-          
+
           {/* QUIÉNES SOMOS */}
-          <a 
-            href="#quienes-somos" 
+          <a
+            href="#about"
+            onClick={(e) => handleSmoothScroll(e, 'about')}
             className={`font-medium py-2 transition-all ${
-              activeSection === 'quienes-somos'
+              activeSection === 'about'
                 ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
                 : 'text-gray-600 hover:text-cyan-600'
             }`}
           >
             QUIÉNES SOMOS
           </a>
-          
-          {/* PROYECTOS con submenú de Productos y Servicios */}
-          <div 
+
+          {/* PROYECTOS con dropdown */}
+          <div
             className="relative"
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-            <button 
+            <button
               className={`font-medium py-2 flex items-center gap-1 transition-all ${
-                activeSection === 'proyectos' || activeSection === 'productos' || activeSection === 'servicios'
+                activeSection === 'services' || activeSection === 'products'
                   ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
                   : 'text-gray-600 hover:text-cyan-600'
               }`}
             >
               PROYECTOS
-              <svg className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className={`w-4 h-4 transition-transform ${
+                  isDropdownOpen ? 'rotate-180' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
-            
+
             {isDropdownOpen && (
               <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-lg py-2 z-50 border border-gray-100">
-                <a 
-                  href="#productos" 
+                <a
+                  href="#services"
+                  onClick={(e) => {
+                    handleSmoothScroll(e, 'services');
+                    setIsDropdownOpen(false);
+                  }}
                   className={`block px-4 py-2 transition-colors ${
-                    activeSection === 'productos'
-                      ? 'bg-cyan-50 text-cyan-600 font-semibold'
-                      : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
-                  }`}
-                >
-                  Productos
-                </a>
-                <a 
-                  href="#servicios" 
-                  className={`block px-4 py-2 transition-colors ${
-                    activeSection === 'servicios'
+                    activeSection === 'services'
                       ? 'bg-cyan-50 text-cyan-600 font-semibold'
                       : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
                   }`}
                 >
                   Servicios
                 </a>
+                <a
+                  href="#products"
+                  onClick={(e) => {
+                    handleSmoothScroll(e, 'products');
+                    setIsDropdownOpen(false);
+                  }}
+                  className={`block px-4 py-2 transition-colors ${
+                    activeSection === 'products'
+                      ? 'bg-cyan-50 text-cyan-600 font-semibold'
+                      : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
+                  }`}
+                >
+                  Productos
+                </a>
               </div>
             )}
           </div>
-          
+
           {/* NUESTRO EQUIPO */}
-          <a 
-            href="#equipo" 
+          <a
+            href="#team"
+            onClick={(e) => handleSmoothScroll(e, 'team')}
             className={`font-medium py-2 transition-all ${
-              activeSection === 'equipo'
+              activeSection === 'team'
                 ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
                 : 'text-gray-600 hover:text-cyan-600'
             }`}
           >
             NUESTRO EQUIPO
           </a>
-          
+
           {/* CLIENTES */}
-          <a 
-            href="#clientes" 
+          <a
+            href="#clients"
+            onClick={(e) => handleSmoothScroll(e, 'clients')}
             className={`font-medium py-2 transition-all ${
-              activeSection === 'clientes'
+              activeSection === 'clients'
                 ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
                 : 'text-gray-600 hover:text-cyan-600'
             }`}
           >
             CLIENTES
           </a>
-          
+
           {/* REPRESENTACIONES */}
-          <a 
-            href="#representaciones" 
+          <a
+            href="#represented-companies"
+            onClick={(e) => handleSmoothScroll(e, 'represented-companies')}
             className={`font-medium py-2 transition-all ${
-              activeSection === 'representaciones'
+              activeSection === 'represented-companies'
                 ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
                 : 'text-gray-600 hover:text-cyan-600'
             }`}
           >
             REPRESENTACIONES
           </a>
-          
-          {/* CONTACTO - Botón destacado */}
-          <a 
-            href="#contacto" 
-            className="text-white px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-all" 
-            style={{ backgroundColor: "rgb(157,158,160)" }}
+
+          {/* CONTACTO */}
+          <a
+            href="#location"
+            onClick={(e) => handleSmoothScroll(e, 'location')}
+            className="text-white px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-all"
+            style={{ backgroundColor: 'rgb(157,158,160)' }}
           >
             CONTACTO
           </a>
         </div>
-        
+
         {/* Botón menú móvil */}
         <div className="lg:hidden">
-          <button onClick={onMenuOpen} className="text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Abrir menú">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          <button
+            onClick={onMenuOpen}
+            className="text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Abrir menú"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </div>

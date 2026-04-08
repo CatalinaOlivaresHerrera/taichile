@@ -30,9 +30,9 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log(`📨 Intentando enviar email para: ${nombre} (${email})`);
-    console.log(`📦 Producto: ${producto || 'No especificado'}`);
-    console.log(`🔧 Servicio: ${servicio || 'No especificado'}`);
+    console.log(`Intentando enviar email para: ${nombre} (${email})`);
+    console.log(`Producto: ${producto || 'No especificado'}`);
+    console.log(`Servicio: ${servicio || 'No especificado'}`);
 
     // 4. Enviar el correo electrónico (CON PRODUCTO Y SERVICIO)
     const { data, error } = await resend.emails.send({
