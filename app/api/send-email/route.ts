@@ -19,8 +19,8 @@ export async function POST(request: Request) {
     // 2. Inicializar Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    // 3. Obtener y validar los datos del cuerpo de la petición
-    const { nombre, email, telefono } = await request.json();
+    // 3. Obtener y validar los datos del cuerpo de la petición (AHORA CON PRODUCTO Y SERVICIO)
+    const { nombre, email, telefono, producto, servicio } = await request.json();
 
     if (!nombre || !email || !telefono) {
       console.warn('⚠️ Faltan campos en la petición:', { nombre, email, telefono });
@@ -31,17 +31,27 @@ export async function POST(request: Request) {
     }
 
     console.log(`📨 Intentando enviar email para: ${nombre} (${email})`);
+    console.log(`📦 Producto: ${producto || 'No especificado'}`);
+    console.log(`🔧 Servicio: ${servicio || 'No especificado'}`);
 
-    // 4. Enviar el correo electrónico
+    // 4. Enviar el correo electrónico (CON PRODUCTO Y SERVICIO)
     const { data, error } = await resend.emails.send({
-      from: 'Formulario Web <onboarding@resend.dev>', // Este es el remitente de prueba
+      from: 'Formulario Web <onboarding@resend.dev>',
       to: ['catita9olivares@gmail.com'], // <<< --- ¡CAMBIA ESTE EMAIL POR EL TUYO! ---
       subject: `Nuevo contacto desde la web: ${nombre}`,
       text: `
         Se ha recibido un nuevo mensaje de contacto:
+        
+        📋 DATOS DEL CONTACTO:
         - Nombre: ${nombre}
         - Email: ${email}
         - Teléfono: ${telefono}
+        
+        📦 PRODUCTO DE INTERÉS:
+        ${producto || 'No especificado'}
+        
+        🔧 SERVICIO DE INTERÉS:
+        ${servicio || 'No especificado'}
       `,
     });
 

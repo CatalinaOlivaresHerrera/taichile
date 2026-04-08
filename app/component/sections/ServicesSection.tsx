@@ -1,8 +1,25 @@
 export default function ServicesSection() {
   const services = [
-    { icon: "fa-laptop", title: "Soluciones Industriales", desc: "Análisis global de maquinarias y sistemas en planta", link: null },
-    { icon: "fa-chalkboard-user", title: "Servicios de Capacitación", desc: "Para la eficiente utilización de los equipos e instalación", link: "Ingresar" },
-    { icon: "fa-newspaper", title: "Encuesta de Satisfacción", desc: "Responde nuestra encuesta para mejorar nuestros cursos", link: "Responder" },
+    {
+      title: "Instalación de equipos",
+      description: "Instalación profesional y puesta en marcha de equipos industriales con estándares de calidad.",
+      image: "/Instalacion.png"
+    },
+    {
+      title: "Calibración y análisis de laboratorio",
+      description: "Servicios de calibración precisa y análisis especializados en laboratorio.",
+      image: "/CaliYana.png"
+    },
+    {
+      title: "Mantención de equipos y planta",
+      description: "Mantenimiento preventivo y correctivo para equipos y plantas industriales.",
+      image: "/Manten.png"
+    },
+    {
+      title: "Análisis de eficiencia de procesos productivos",
+      description: "Optimización y mejora continua de procesos para maximizar la productividad.",
+      image: "/TAIChile_DSC3188.jpg"
+    }
   ];
 
   return (
@@ -10,17 +27,39 @@ export default function ServicesSection() {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-white mb-2">Servicios Especializados</h2>
         <p className="text-center text-red-200 mb-12 text-sm">Soluciones a la medida de su industria</p>
-        <div className="grid md:grid-cols-3 gap-8">
-          {services.map((s, i) => (
-            <div key={i} className="rounded-2xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.10)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.15)" }}>
-              <i className={`fas ${s.icon} text-red-200 text-4xl mb-4`}></i>
-              <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
-              <p className="text-red-100">{s.desc}</p>
-              {s.link && (
-                <a href="#" className="font-semibold text-sm mt-3 inline-block hover:opacity-80 transition-colors" style={{ color: "#17a2b8" }}>
-                  {s.link} ››
-                </a>
-              )}
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
+            <div 
+              key={index} 
+              className="rounded-2xl overflow-hidden transition-transform hover:scale-105 duration-300"
+              style={{ backgroundColor: "rgba(255,255,255,0.10)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.15)" }}
+            >
+              {/* Imagen */}
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              
+              {/* Contenido */}
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-white mb-2 text-center">{service.title}</h3>
+                <p className="text-red-100 text-sm text-center">{service.description}</p>
+                
+                {/* Botón opcional */}
+                <div className="flex justify-center mt-4">
+                  <a 
+                    href="#contacto" 
+                    className="text-sm font-semibold px-4 py-1.5 rounded-full transition-all hover:opacity-80"
+                    style={{ backgroundColor: "rgba(23,162,184,0.8)", color: "white" }}
+                  >
+                    Consultar ›
+                  </a>
+                </div>
+              </div>
             </div>
           ))}
         </div>

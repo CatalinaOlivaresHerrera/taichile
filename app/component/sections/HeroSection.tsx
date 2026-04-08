@@ -2,11 +2,13 @@
 
 import ContactForm from '../ui/ContactForm';
 
-// Define el tipo del formulario
+// Define el tipo del formulario (debe coincidir con el de ContactForm)
 interface FormData {
   nombre: string;
   email: string;
   telefono: string;
+  producto: string;  // ← agregar
+  servicio: string;   // ← agregar
 }
 
 interface HeroSectionProps {
