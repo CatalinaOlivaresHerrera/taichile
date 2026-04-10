@@ -27,13 +27,13 @@ export default function QuienesSomosSection() {
           className="relative z-10 w-[62%] flex-shrink-0 bg-[#3d3d3d] p-8 md:p-12 pr-24"
           style={{ clipPath: "polygon(0 0, 100% 0, 86% 100%, 0 100%)" }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-5">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest mb-5">
             Ingeniería especializada
           </span>
 
           <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
             Soluciones en{" "}
-            <span className="text-cyan-400 font-mono">Ingeniería<br />Industrial</span>{" "}
+            <span className="text-red-400 font-mono">Ingeniería<br />Industrial</span>{" "}
             para su Empresa
           </h1>
 
@@ -42,7 +42,7 @@ export default function QuienesSomosSection() {
             y servicios de mantención para la industria.
           </p>
 
-          <button className="bg-cyan-500 hover:bg-cyan-400 text-white px-8 py-3 rounded-md font-semibold text-sm transition-colors duration-200">
+          <button className="bg-red-500 hover:bg-red-400 text-white px-8 py-3 rounded-md font-semibold text-sm transition-colors duration-200">
             Conocer más
           </button>
         </div>

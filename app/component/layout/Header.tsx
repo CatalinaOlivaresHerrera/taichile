@@ -43,7 +43,8 @@ export default function Header({ onMenuOpen }: HeaderProps) {
       'mission',
       'location',
       'represented-companies',
-      'clients'
+      'clients',
+      'contactFormSection'  // Agregado
     ];
     
     const observer = new IntersectionObserver(
@@ -200,10 +201,10 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             INSIGHTS DEL SECTOR
           </a>
 
-          {/* CONTACTO */}
+          {/* CONTACTO - CORREGIDO */}
           <a
-            href="#hero"
-            onClick={(e) => handleSmoothScroll(e, 'hero')}
+            href="#contactFormSection"
+            onClick={(e) => handleSmoothScroll(e, 'contactFormSection')}
             className="text-white px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-all"
             style={{ backgroundColor: 'rgb(157,158,160)' }}
           >

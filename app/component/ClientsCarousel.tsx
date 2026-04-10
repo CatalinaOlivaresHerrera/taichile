@@ -8,6 +8,8 @@ const clients = [
   { name: 'Cliente 2', logo: '/cliente2.png' },
   { name: 'Cliente 3', logo: '/cliente3.png' },
   { name: 'Cliente 4', logo: '/cliente4.png' },
+  { name: 'Cliente 5', logo: '/cliente5.jpeg' },
+  { name: 'Cliente 6', logo: '/cliente6.jpeg' },
   // Agrega más logos según te los entreguen
 ];
 
