@@ -17,8 +17,8 @@ import RepresentedCompanies from "./component/RepresentedCompanies";
 import ClientsCarousel from "./component/ClientsCarousel";
 import RotatingEquipmentPopup from "./component/popups/RotatingEquipmentPopup";
 import WhatsAppWidget from "./component/WhatsAppWidget";
+import ContactFormSection from "./component/sections/ContactFormSection";
 
-// Definir la interfaz FormData
 interface FormData {
   nombre: string;
   email: string;
@@ -33,8 +33,8 @@ export default function Home() {
     nombre: '', 
     email: '', 
     telefono: '',
-    producto: '',   // ← AGREGADO
-    servicio: ''    // ← AGREGADO
+    producto: '',
+    servicio: ''
   });
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
@@ -51,14 +51,13 @@ export default function Home() {
           nombre: formData.nombre,
           email: formData.email,
           telefono: formData.telefono,
-          producto: formData.producto,   // ← ENVIAR
-          servicio: formData.servicio    // ← ENVIAR
+          producto: formData.producto,
+          servicio: formData.servicio
         }),
       });
       const data = await res.json();
       if (data.ok) {
         setEnviado(true);
-        // Resetear el formulario incluyendo producto y servicio
         setFormData({ 
           nombre: '', 
           email: '', 
@@ -66,6 +65,7 @@ export default function Home() {
           producto: '',
           servicio: ''
         });
+        setTimeout(() => setEnviado(false), 5000);
       } else {
         setError(true);
       }
@@ -82,69 +82,65 @@ export default function Home() {
       <Header onMenuOpen={() => setIsMenuOpen(true)} />
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       
-      {/* INICIO - HeroSection */}
+      {/* HERO SECTION */}
       <section id="hero">
-        <HeroSection 
-          formData={formData}
-          setFormData={setFormData}
-          enviando={enviando}
-          enviado={enviado}
-          error={error}
-          onSubmit={handleSubmit}
-        />
+        <HeroSection />
       </section>
       
-      {/* QUIÉNES SOMOS - AboutSection */}
       <section id="about">
         <AboutSection />
       </section>
       
-      {/* NUESTRO EQUIPO - TeamSection */}
       <section id="team">
         <TeamSection />
       </section>
       
-      {/* ProcessSection (opcional, no está en el header pero se mantiene) */}
       <section id="process">
         <ProcessSection />
       </section>
       
-      {/* SERVICIOS - ServicesSection */}
       <section id="services">
         <ServicesSection />
       </section>
       
-      {/* PRODUCTOS - ProductsSection */}
       <section id="products">
         <ProductsSection />
       </section>
       
-      {/* AboutTaichileSection (opcional) */}
       <section id="about-taichile">
         <AboutTaichileSection />
       </section>
       
-      {/* MissionSection (opcional) */}
       <section id="mission">
         <MissionSection />
       </section>
       
-      {/* CONTACTO - LocationSection */}
       <section id="location">
         <LocationSection />
       </section>
       
-      {/* InsightsSection */}
       <section id="InsightsSection">
         <InsightsSection />
       </section>
       
-      {/* REPRESENTACIONES - RepresentedCompanies */}
+      {/* FORMULARIO DE CONTACTO */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6 max-w-2xl">
+          <ContactFormSection 
+            formData={formData}
+            setFormData={setFormData}
+            enviando={enviando}
+            enviado={enviado}
+            error={error}
+            onSubmit={handleSubmit}
+          />
+        </div>
+      </section>
+      
       <section id="represented-companies">
         <RepresentedCompanies />
       </section>
       
-      {/* CLIENTES - ClientsCarousel */}
       <section id="clients">
         <ClientsCarousel />
       </section>
