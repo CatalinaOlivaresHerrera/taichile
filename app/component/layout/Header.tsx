@@ -187,6 +187,19 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             REPRESENTACIONES
           </a>
 
+          {/* INSIGHTS DEL SECTOR */}
+          <a
+            href="#InsightsSection"
+            onClick={(e) => handleSmoothScroll(e, 'InsightsSection')}
+            className={`font-medium py-2 transition-all ${
+              activeSection === 'InsightsSection'
+                ? 'text-cyan-600 font-semibold border-b-2 border-cyan-600'
+                : 'text-gray-600 hover:text-cyan-600'
+            }`}
+          >
+            INSIGHTS DEL SECTOR
+          </a>
+
           {/* CONTACTO */}
           <a
             href="#hero"

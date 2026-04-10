@@ -6,6 +6,7 @@ import MobileMenu from "./component/layout/MobileMenu";
 import HeroSection from "./component/sections/HeroSection";
 import ProcessSection from "./component/sections/ProcessSection";
 import AboutSection from "./component/sections/AboutSection";
+import InsightsSection from "./component/sections/InsightsSection";
 import ServicesSection from "./component/sections/ServicesSection";
 import ProductsSection from "./component/sections/ProductsSection";
 import AboutTaichileSection from "./component/sections/AboutTaichileSection";
@@ -131,6 +132,11 @@ export default function Home() {
       {/* CONTACTO - LocationSection */}
       <section id="location">
         <LocationSection />
+      </section>
+      
+      {/* InsightsSection */}
+      <section id="InsightsSection">
+        <InsightsSection />
       </section>
       
       {/* REPRESENTACIONES - RepresentedCompanies */}

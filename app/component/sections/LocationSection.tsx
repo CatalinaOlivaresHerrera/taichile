@@ -1,7 +1,7 @@
 // app/component/sections/LocationSection.tsx
 export default function LocationSection() {
   return (
-    <section id="instalaciones" className="py-20" style={{ background: "linear-gradient(135deg, #1e3a5f 0%, #1e40af 60%, #1d4ed8 100%)" }}>
+    <section id="instalaciones" className="py-20" style={{ backgroundColor: 'rgb(48, 104, 215)' }}>
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-white mb-2">Nuestra Ubicación</h2>
         <p className="text-center text-blue-200 mb-12 text-sm">Encuéntrenos en Talca, Región del Maule</p>
