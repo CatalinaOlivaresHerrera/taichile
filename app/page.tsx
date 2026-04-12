@@ -124,7 +124,7 @@ export default function Home() {
       </section>
       
       {/* FORMULARIO DE CONTACTO */}
-      <section className="py-16 bg-gray-50">
+      <section id="contactFormSection" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 max-w-2xl">
           <ContactFormSection 
             formData={formData}
