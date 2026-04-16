@@ -27,6 +27,37 @@ interface FormData {
   servicio: string;
 }
 
+// 🔥 Función para validar teléfono chileno (+56 seguido de 9 dígitos)
+const validarTelefonoChile = (telefono: string): boolean => {
+  // Eliminar espacios, guiones y puntos
+  const telefonoLimpio = telefono.replace(/[\s\-\.]/g, '');
+  // Expresión regular: +56 seguido de exactamente 9 dígitos
+  const regex = /^\+56\d{9}$/;
+  return regex.test(telefonoLimpio);
+};
+
+// 🔥 Función para formatear teléfono mientras escribe
+const formatearTelefono = (valor: string): string => {
+  // Eliminar todo lo que no sea números y el signo +
+  let numeros = valor.replace(/[^\d+]/g, '');
+  
+  // Si no empieza con +, agregarlo
+  if (!numeros.startsWith('+')) {
+    if (numeros.startsWith('56')) {
+      numeros = '+' + numeros;
+    } else if (numeros.startsWith('9')) {
+      numeros = '+56' + numeros;
+    }
+  }
+  
+  // Limitar a +56 + 9 dígitos = 12 caracteres máximo
+  if (numeros.length > 12) {
+    numeros = numeros.slice(0, 12);
+  }
+  
+  return numeros;
+};
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState<FormData>({ 
@@ -39,24 +70,64 @@ export default function Home() {
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
   const [error, setError] = useState(false);
+  const [mensajeError, setMensajeError] = useState(""); // 🔥 Nuevo estado
 
   const handleSubmit = async () => {
+    // Validar campos requeridos
+    if (!formData.nombre || !formData.email || !formData.telefono) {
+      setMensajeError("Por favor, complete todos los campos requeridos");
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+        setMensajeError("");
+      }, 3000);
+      return;
+    }
+
+    // 🔥 VALIDACIÓN DE TELÉFONO CHILENO
+    if (!validarTelefonoChile(formData.telefono)) {
+      setMensajeError("El teléfono debe tener el formato: +56 9XXXXXXXX (ej: +56912345678)");
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+        setMensajeError("");
+      }, 5000);
+      return;
+    }
+
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setMensajeError("Ingrese un email válido (ej: nombre@dominio.com)");
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+        setMensajeError("");
+      }, 3000);
+      return;
+    }
+
     setEnviando(true);
     setError(false);
+    setMensajeError("");
+
     try {
-      const res = await fetch('/api/send-email', {
+      const res = await fetch('/send-email.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
           nombre: formData.nombre,
           email: formData.email,
           telefono: formData.telefono,
-          producto: formData.producto,
-          servicio: formData.servicio
-        }),
+          producto: formData.producto || 'No especificado',
+          servicio: formData.servicio || 'No especificado',
+        })
       });
+      
       const data = await res.json();
-      if (data.ok) {
+      if (data.success) {
         setEnviado(true);
         setFormData({ 
           nombre: '', 
@@ -67,13 +138,29 @@ export default function Home() {
         });
         setTimeout(() => setEnviado(false), 5000);
       } else {
+        setMensajeError(data.message || "Error al enviar. Intente nuevamente.");
         setError(true);
+        setTimeout(() => {
+          setError(false);
+          setMensajeError("");
+        }, 3000);
       }
     } catch {
+      setMensajeError("Error de conexión. Intente nuevamente.");
       setError(true);
+      setTimeout(() => {
+        setError(false);
+        setMensajeError("");
+      }, 3000);
     } finally {
       setEnviando(false);
     }
+  };
+
+  // 🔥 Manejador para el teléfono con formateo automático
+  const handleTelefonoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valorFormateado = formatearTelefono(e.target.value);
+    setFormData({ ...formData, telefono: valorFormateado });
   };
 
   return (
@@ -133,6 +220,8 @@ export default function Home() {
             enviado={enviado}
             error={error}
             onSubmit={handleSubmit}
+            mensajeError={mensajeError}
+            onTelefonoChange={handleTelefonoChange}
           />
         </div>
       </section>

@@ -21,7 +21,7 @@ export default function AboutSection() {
             </p>
 
             <a
-              href="#"
+              href="#AboutTaichileSection"
               className="text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 inline-block transition-all"
               style={{ backgroundColor: "rgb(255,60,65)" }}
             >

@@ -2,15 +2,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const clients = [
-  { name: 'Cliente 1', logo: '/cliente1.png' },
-  { name: 'Cliente 2', logo: '/cliente2.png' },
-  { name: 'Cliente 3', logo: '/cliente3.png' },
-  { name: 'Cliente 4', logo: '/cliente4.png' },
-  { name: 'Cliente 5', logo: '/cliente5.jpeg' },
-  { name: 'Cliente 6', logo: '/cliente6.jpeg' },
-  // Agrega más logos según te los entreguen
+  { name: 'CMPC', logo: '/cliente1.png', url: 'https://www.cmpc.com/' },
+  { name: 'ARAUCO', logo: '/cliente2.png', url: 'https://arauco.com/chile/' },
+  { name: 'CMPC PULP', logo: '/cliente3.png', url: 'https://www.cmpcpulp.com/' },
+  { name: 'CPP', logo: '/cliente4.png', url: 'https://www.cpp.cl/' },
+  { name: 'CINTAC', logo: '/cliente5.jpeg', url: 'https://www.cintac.cl/' },
+  { name: 'Softys', logo: '/cliente6.jpeg', url: 'https://www.softys.com/es/' },
 ];
 
 export default function ClientsCarousel() {
@@ -46,7 +46,7 @@ export default function ClientsCarousel() {
   if (clients.length === 0) return null;
 
   return (
-    <section className="py-16 bg-red">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Nuestros Clientes</h2>
         <p className="text-center text-gray-600 mb-12">Empresas que confían en nosotros</p>
@@ -68,17 +68,25 @@ export default function ClientsCarousel() {
               style={{ transform: `translateX(-${currentIndex * (100 / visibleCount)}%)` }}
             >
               {clients.map((client, index) => (
-                <div 
+                <a
                   key={index}
+                  href={client.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ minWidth: `calc(${100 / visibleCount}% - ${(visibleCount - 1) * 2 / visibleCount}rem)` }}
-                  className="bg-gray-50 rounded-xl p-6 flex items-center justify-center h-32"
+                  className="bg-white rounded-xl p-8 flex items-center justify-center h-48 hover:shadow-xl transition-all duration-300 group cursor-pointer border border-gray-100"
                 >
-                  <img 
-                    src={client.logo} 
-                    alt={client.name} 
-                    className="max-h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
-                  />
-                </div>
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={client.logo}
+                      alt={`Logo de ${client.name}`}
+                      width={200}
+                      height={100}
+                      className="object-contain opacity-80 group-hover:opacity-100 transition-all duration-300"
+                      style={{ width: 'auto', height: 'auto', maxHeight: '96px' }}
+                    />
+                  </div>
+                </a>
               ))}
             </div>
           </div>

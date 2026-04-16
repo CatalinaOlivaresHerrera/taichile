@@ -41,10 +41,6 @@ export default function QuienesSomosSection() {
             Más de 20 años de experiencia en medición, control de consistencia
             y servicios de mantención para la industria.
           </p>
-
-          <button className="bg-red-500 hover:bg-red-400 text-white px-8 py-3 rounded-md font-semibold text-sm transition-colors duration-200">
-            Conocer más
-          </button>
         </div>
 
         <div className="absolute inset-y-0 right-0 left-[52%] z-0 border-4 border-black">

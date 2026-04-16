@@ -10,25 +10,28 @@ interface FormData {
   servicio: string;
 }
 
-interface ContactFormProps {
+interface ContactFormSectionProps {
   formData: FormData;
   setFormData: (data: FormData | ((prev: FormData) => FormData)) => void;
   enviando: boolean;
   enviado: boolean;
   error: boolean;
   onSubmit: () => void;
+  mensajeError?: string;  // 🔥 NUEVA PROP
+  onTelefonoChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;  // 🔥 NUEVA PROP
 }
 
-export default function ContactForm({ 
+export default function ContactFormSection({ 
   formData, 
   setFormData, 
   enviando, 
   enviado, 
   error, 
-  onSubmit 
-}: ContactFormProps) {
+  onSubmit,
+  mensajeError = "",  // 🔥 VALOR POR DEFECTO
+  onTelefonoChange  // 🔥 NUEVA PROP
+}: ContactFormSectionProps) {
   
-  // Prueba con diferentes imágenes
   const imagenesFondo = [
     '/Panorama_TAIChile_03.jpg',
     '/somos5.jpg',
@@ -36,9 +39,8 @@ export default function ContactForm({
     '/somos2.jpg',
   ];
   
-  const [imagenActual] = useState(imagenesFondo[1]); // Usa somos5.jpg que sabemos que funciona
+  const [imagenActual] = useState(imagenesFondo[1]);
 
-  // Opciones para PRODUCTOS
   const opcionesProductos = [
     { value: "", label: "Seleccione un producto" },
     { value: "MEK STRATUS 360", label: "MEK STRATUS 360" },
@@ -48,7 +50,6 @@ export default function ContactForm({
     { value: "Sistemas de Guiado de Banda", label: "Sistemas de Guiado de Banda" }
   ];
 
-  // Opciones para SERVICIOS
   const opcionesServicios = [
     { value: "", label: "Seleccione un servicio" },
     { value: "Instalación de equipos", label: "Instalación de equipos" },
@@ -57,26 +58,28 @@ export default function ContactForm({
     { value: "Análisis de eficiencia de procesos productivos", label: "Análisis de eficiencia de procesos productivos" }
   ];
 
+  const handleTelefonoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onTelefonoChange) {
+      onTelefonoChange(e);
+    } else {
+      setFormData({ ...formData, telefono: e.target.value });
+    }
+  };
+
   return (
     <div 
       id="contacto" 
       className="relative rounded-2xl shadow-2xl overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ 
-        backgroundImage: `url('${imagenActual}')`,
-      }}
+      style={{ backgroundImage: `url('${imagenActual}')` }}
     >
-      {/* Overlay oscuro */}
       <div className="absolute inset-0 bg-black/60"></div>
       
-      {/* Contenido del formulario */}
       <div className="relative z-10">
-        {/* Header rojo */}
         <div className="text-white p-6" style={{ backgroundColor: "rgb(255,60,65)" }}>
           <h2 className="text-2xl font-bold">Formulario de contacto</h2>
           <p className="text-gray-100 text-sm">Nuestro equipo le responderá en menos de 24 horas.</p>
         </div>
         
-        {/* Cuerpo del formulario */}
         <div className="p-6 bg-white/95 backdrop-blur-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -108,17 +111,16 @@ export default function ContactForm({
               <input 
                 type="tel" 
                 value={formData.telefono} 
-                onChange={(e) => setFormData({ ...formData, telefono: e.target.value })} 
+                onChange={handleTelefonoChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 outline-none text-gray-900 font-medium" 
-                placeholder="+56 9 ...." 
+                placeholder="+56912345678" 
                 required
               />
+              <p className="text-xs text-gray-500 mt-1">Formato: +56 9XXXXXXXX (ej: +56912345678)</p>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-800 uppercase mb-1">
-                Producto de interés
-              </label>
+              <label className="block text-xs font-bold text-gray-800 uppercase mb-1">Producto de interés</label>
               <div className="relative">
                 <select
                   value={formData.producto}
@@ -140,9 +142,7 @@ export default function ContactForm({
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-xs font-bold text-gray-800 uppercase mb-1">
-                Servicio de interés
-              </label>
+              <label className="block text-xs font-bold text-gray-800 uppercase mb-1">Servicio de interés</label>
               <div className="relative">
                 <select
                   value={formData.servicio}
@@ -182,7 +182,7 @@ export default function ContactForm({
             
             {error && (
               <p className="text-center text-sm" style={{ color: "rgb(255,60,65)" }}>
-                Hubo un error al enviar. Intenta de nuevo.
+                {mensajeError || "Hubo un error al enviar. Intenta de nuevo."}
               </p>
             )}
             

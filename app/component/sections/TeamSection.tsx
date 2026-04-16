@@ -6,14 +6,14 @@ import { useState, useEffect } from 'react';
 interface TeamMember { name: string; role: string; desc: string; avatarSrc?: string; }
 
 const TEAM_MEMBERS: TeamMember[] = [
-  { name: "José Sepúlveda", role: "Ingeniero Informatico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/franciscoCar.jpeg" },
-  { name: "Francisco Carreño", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/joseSe.jpeg" },
-  { name: "Ignacio Chacon", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/ignacio.jpg" },
-  { name: "Ricardo Chacón", role: "Ingeniero Informatico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/BaselinePerson.png" },
-  { name: "Claudio Pereda", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/BaselinePerson.png" },
-  { name: "Bladimir Valenzuela", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/BaselinePerson.png" },
-  { name: "Rodrigo Abarza", role: "Ingeniero Informatico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/BaselinePerson.png" },
-  { name: "Bastian Tapia", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/BaselinePerson.png" }
+  { name: "José Sepúlveda", role: "Gerente Técnico – Ingeniero Electrónico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/franciscoCar.jpeg" },
+  { name: "Ignacio Chacón", role: "Ingeniero Especialista – Ingeniero Mecatrónico", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/ignacio.jpg" },
+  { name: "Francisco Carreño", role: "Ingeniero Especialista – Ingeniero Mecatrónico", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/joseSe.jpeg" },
+  { name: "Ricardo Chacón", role: "Asesor Desarrollo – PhD Economics of Education", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/BaselinePerson.png" },
+  //{ name: "Claudio Pereda", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/BaselinePerson.png" },
+  //{ name: "Bladimir Valenzuela", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/BaselinePerson.png" },
+  //{ name: "Rodrigo Abarza", role: "Ingeniero Informatico", desc: "Especialista en control de procesos y metrología industrial", avatarSrc: "/BaselinePerson.png" },
+  //{ name: "Bastian Tapia", role: "Técnico de Terreno", desc: "Mantención y calibración de instrumentación analítica", avatarSrc: "/BaselinePerson.png" }
 ];
 
 export default function TeamSection() {
