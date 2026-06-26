@@ -65,8 +65,7 @@ Es un sistema automático que detecta y corrige desviaciones laterales de la ban
         id="productos"
         className="py-20"
         style={{
-          background:
-            "linear-gradient(140deg, #fffbf9cd 10%, #9c9898 50%, #b91c1c 100%)"
+          backgroundColor: "#7f7f7f"  // Fondo gris oscuro sólido, sin degradado
         }}
       >
         <div className="container mx-auto px-6 max-w-7xl">
@@ -76,7 +75,7 @@ Es un sistema automático que detecta y corrige desviaciones laterales de la ban
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
               Nuestros Productos
             </h2>
-            <p className="text-lg text-gray-200 mt-2">
+            <p className="text-lg text-gray-300 mt-2">
               Soluciones de alta calidad para la industria
             </p>
             <div className="w-24 h-1 bg-red-500 mx-auto mt-4 rounded-full"></div>

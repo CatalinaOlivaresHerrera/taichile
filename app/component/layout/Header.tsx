@@ -201,6 +201,14 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             INSIGHTS DEL SECTOR
           </a>
 
+          {/* DATOS */}
+          <a 
+            href="/datos"
+            className="text-gray-600 hover:text-cyan-600 font-medium py-2 transition-all"
+           >
+            DATOS
+          </a>
+
           {/* CONTACTO - CORREGIDO */}
           <a
             href="#contactFormSection"

@@ -1,4 +1,3 @@
-// app/component/ClientsCarousel.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -13,13 +12,15 @@ const clients = [
   { name: 'Softys', logo: '/cliente6.jpeg', url: 'https://www.softys.com/es/' },
 ];
 
+const GAP = '1.5rem';
+
 export default function ClientsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) setVisibleCount(2);
+      if (window.innerWidth < 640) setVisibleCount(1);
       else if (window.innerWidth < 1024) setVisibleCount(3);
       else setVisibleCount(4);
     };
@@ -35,13 +36,8 @@ export default function ClientsCarousel() {
     return () => clearInterval(interval);
   }, [visibleCount]);
 
-  const next = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, clients.length - visibleCount));
-  };
-
-  const prev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
+  const next = () => setCurrentIndex((prev) => Math.min(prev + 1, clients.length - visibleCount));
+  const prev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
 
   if (clients.length === 0) return null;
 
@@ -50,7 +46,7 @@ export default function ClientsCarousel() {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Nuestros Clientes</h2>
         <p className="text-center text-gray-600 mb-12">Empresas que confían en nosotros</p>
-        
+
         <div className="relative px-12">
           <button
             onClick={prev}
@@ -61,11 +57,14 @@ export default function ClientsCarousel() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          
+
           <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out gap-8"
-              style={{ transform: `translateX(-${currentIndex * (100 / visibleCount)}%)` }}
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                gap: GAP,
+                transform: `translateX(calc(-${currentIndex} * (100% / ${visibleCount} + ${GAP} / ${visibleCount})))`,
+              }}
             >
               {clients.map((client, index) => (
                 <a
@@ -73,8 +72,10 @@ export default function ClientsCarousel() {
                   href={client.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ minWidth: `calc(${100 / visibleCount}% - ${(visibleCount - 1) * 2 / visibleCount}rem)` }}
-                  className="bg-white rounded-xl p-8 flex items-center justify-center h-48 hover:shadow-xl transition-all duration-300 group cursor-pointer border border-gray-100"
+                  style={{
+                    minWidth: `calc(100% / ${visibleCount} - ${GAP} * ${visibleCount - 1} / ${visibleCount})`,
+                  }}
+                  className="bg-white rounded-xl p-4 sm:p-8 flex items-center justify-center h-40 sm:h-48 hover:shadow-xl transition-all duration-300 group cursor-pointer border border-gray-100"
                 >
                   <div className="relative w-full h-full flex items-center justify-center">
                     <Image
@@ -83,14 +84,14 @@ export default function ClientsCarousel() {
                       width={200}
                       height={100}
                       className="object-contain opacity-80 group-hover:opacity-100 transition-all duration-300"
-                      style={{ width: 'auto', height: 'auto', maxHeight: '96px' }}
+                      style={{ width: 'auto', height: 'auto', maxHeight: '80px' }}
                     />
                   </div>
                 </a>
               ))}
             </div>
           </div>
-          
+
           <button
             onClick={next}
             disabled={currentIndex >= clients.length - visibleCount}
@@ -101,7 +102,7 @@ export default function ClientsCarousel() {
             </svg>
           </button>
         </div>
-        
+
         <div className="flex justify-center gap-2 mt-8">
           {Array.from({ length: clients.length - visibleCount + 1 }).map((_, idx) => (
             <button

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-/* ✅ TIPADO */
 type Insight = {
   title: string;
   resumen: string;
@@ -13,16 +12,14 @@ type Insight = {
 
 export default function InsightsSection() {
 
-  /* ✅ STATE SIN ERROR */
   const [selected, setSelected] = useState<Insight | null>(null);
 
-  /* ✅ DATA */
   const insights: Insight[] = [
     {
       title: "Panorama de la industria forestal en Chile",
       resumen: "El sector forestal chileno continúa siendo uno de los principales motores exportadores del país, con la celulosa como producto central. La disponibilidad de fibra (principalmente pino radiata y eucalipto) y la eficiencia industrial han permitido posicionar a Chile como actor relevante en mercados globales.",
       detalle: "La competitividad del sector está cada vez más vinculada a la optimización del uso de fibra y eficiencia operacional, especialmente en un contexto de presión por costos y sostenibilidad.",
-      icon: "/forest.png",  // ✅ Usa la imagen PNG
+      icon: "/forest.png",
       links: [
         {
           url: "https://www.odepa.gob.cl/wp-content/uploads/2017/12/InformeIndustriaForestal2016.pdf",
@@ -36,7 +33,7 @@ export default function InsightsSection() {
       detalle: "La sostenibilidad está dejando de ser solo reputacional y se está convirtiendo en un driver operacional, impulsando mejoras en control de procesos, eficiencia energética y calidad de fibra.",
       icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
-      </svg>`,  // ✅ SVG de la flecha
+      </svg>`,
       links: [
         {
           url: "https://www.cmpc.com/certificaciones-y-reportes/",
@@ -60,7 +57,7 @@ export default function InsightsSection() {
       title: "Digitalización y control de procesos en plantas de celulosa",
       resumen: "La digitalización y el uso de tecnologías de medición avanzada están transformando la operación de plantas de celulosa, permitiendo monitoreo en tiempo real y toma de decisiones basada en datos.",
       detalle: "La adopción de estas tecnologías permite reducir variabilidad, mejorar eficiencia y aumentar la estabilidad del proceso, aspectos clave en mercados altamente competitivos.",
-      icon: "/icons/digital.png",
+      icon: "/digital.png",
       links: [
         {
           url: "https://www.mckinsey.com/industries/packaging-and-paper/our-insights",
@@ -88,18 +85,18 @@ export default function InsightsSection() {
       
       <div className="container mx-auto px-6">
 
-        {/* TITULO */}
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
+        {/* TITULO EN BLANCO */}
+        <h2 className="text-3xl font-bold text-center text-white mb-12 drop-shadow-md">
           Insights del Sector
         </h2>
 
         {/* GRID */}
         <div className="grid md:grid-cols-3 gap-8">
           {insights.map((item, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+            <div key={idx} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
 
               {/* ICONO + TITULO */}
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 justify-center">
 
                 <div className="w-10 h-10 flex items-center justify-center bg-cyan-100 rounded-full">
                   {item.icon.startsWith('<svg') ? (
@@ -112,14 +109,14 @@ export default function InsightsSection() {
                   )}
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg font-bold text-gray-800 text-center">
                   {item.title}
                 </h3>
 
               </div>
 
               {/* RESUMEN */}
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-6 text-justify">
                 {item.resumen}
               </p>
 
@@ -152,12 +149,12 @@ export default function InsightsSection() {
             </button>
 
             {/* TITULO */}
-            <h3 className="text-2xl font-bold mb-4">
+            <h3 className="text-2xl font-bold mb-4 text-center">
               {selected.title}
             </h3>
 
             {/* DETALLE */}
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed text-justify">
               {selected.detalle}
             </p>
 

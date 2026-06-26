@@ -37,7 +37,7 @@ export default function QuienesSomosSection() {
             para su Empresa
           </h1>
 
-          <p className="text-sm md:text-base text-gray-300 mb-8 font-mono max-w-md">
+          <p className="text-sm md:text-base text-gray-300 mb-8 font-mono max-w-md text-justify">
             Más de 20 años de experiencia en medición, control de consistencia
             y servicios de mantención para la industria.
           </p>
